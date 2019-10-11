@@ -1,5 +1,6 @@
-//middlewear
+//middleware
 
+const bcrypt = require('bcryptjs')
 const AuthService = require('./authService')
 
 function requireAuth(req, res, next) {
@@ -23,10 +24,18 @@ function requireAuth(req, res, next) {
      tokenUserName
    )
      .then(user => {
-       if (!user || user.password !== tokenPassword) {
+       if (!user) {
          return res.status(401).json({ error: 'Unauthorized request' })
        }
-       next()
+
+       return bcrypt.compare(tokenPassword, user.password)
+        .then(passwordsMatch => {
+          if(!passwordsMatch){
+            return res.status(401).json({ error: 'Unauthorized request' })
+        }
+        req.user = user
+        next()
+        })
      })
      .catch(next)
   }
