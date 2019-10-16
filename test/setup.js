@@ -7,7 +7,7 @@ const { expect } = require('chai')
 const supertest = require('supertest')
 
 process.env.TEST_DB_URL = process.env.TEST_DB_URL
-  || "postgresql://dunder-mifflin@localhost/thingful-auth-test"
+  || "postgresql://postgres@localhost/thingful-auth-test"
 
 global.expect = expect
 global.supertest = supertest

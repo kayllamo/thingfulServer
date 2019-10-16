@@ -44,7 +44,7 @@ describe.only('Things Endpoints', function() {
         )
       )
 
-      it.skip('responds with 200 and all of the things', () => {
+      it('responds with 200 and all of the things', () => {
         const expectedThings = testThings.map(thing =>
           helpers.makeExpectedThing(
             testUsers,
